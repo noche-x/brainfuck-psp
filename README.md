@@ -1,6 +1,7 @@
 # Brainfuck for PSP
 ## Info
-WARNING: This project is still in beta. This is a brainfuck interpreter for the psp. Currently you can't run a code from file but it's coming real soon but you can code in brainfuck on the psp.
+WARNING: This project is still in beta. 
+This is a brainfuck interpreter for the psp. Currently you can't run a code from file but it's coming real soon but you can code in brainfuck on the psp.
 
 ## Installing
 1. Go to the releases tab and download the latest version
