@@ -15,9 +15,6 @@ PSP_HEAP_SIZE_MAX();
 // make it easier to type
 #define pspprint pspDebugScreenPrintf
 
-unsigned char tape[30000] = {0};
-unsigned char *ptr = tape;
-
 int onScreenKeyboard(unsigned short *descritpion, unsigned short *outtext, int maxtextinput)
 {
 
@@ -89,8 +86,26 @@ int main()
 {
     pspDebugScreenInit();
     setupExitCallback();
+
+    char tape[30000] = {0};
+    for (int i = 0; i < 30000; i++)
+        tape[i] = 0;
+    char *ptr = tape;
+
+    sceKernelDcacheWritebackInvalidateAll();
     // TODO show open from file or code directly menu
     // TODO show file manager
+    std::cout << "ayy fuck you" << std::endl;
+
+    int o_x = pspDebugScreenGetX(), o_y = pspDebugScreenGetX();
+    pspDebugScreenSetXY(0, 33);
+    pspprint("up: , down: . left: <  right: >  x: -  o: ]  /\: +  []: [  start: run");
+    pspDebugScreenSetXY(o_x, o_y);
+
+    pspprint(" _          _        _ ___  \n");
+    pspprint("|_._ _.o.__|_   _|__|_(_|_) \n");
+    pspprint("|_| (_||| || |_(_|< | __|   \n");
+    pspprint("\n");
 
     // log enter the brainfuck code
     pspprint("[i] enter your brainfuck code: \n");
@@ -179,28 +194,23 @@ int main()
     //                            std::istreambuf_iterator<char>());
     // in.close();
 
-    contents = ">++++++++[<+++++++++>-]<.>++++[<+++++++>-]<+.+++++++..+++.>>++++++[<+++++++>-]<++.------------.>++++++[<+++++++++>-]<+.<.+++.------.--------.>>>++++[<++++++++>-]<+.";
+    //contents = "++++++++++[>+++++++>++++++++++>+++>+<<<<-]>++.>+.+++++++..+++.>++.<<+++++++++++++++.>.+++.------.--------.>+.>.";
     char *input = (char *)contents.c_str();
 
     pspprint("\n");
-    pspprint("your code is: \n");
-    pspprint(contents.c_str());
-    pspprint("\n");
-    pspprint("\n");
-    pspprint("your code is: \n");
+    pspprint("[i] your code is: \n");
     pspprint(input);
     pspprint("\n");
-
-    
 
     size_t i;
     size_t loop;
     char current_char;
+    std::cout << "output: " << std::endl;
+    std::string output;
     for (i = 0; input[i] != 0; i++)
     {
-        int x = pspDebugScreenGetX();
-        int y = pspDebugScreenGetY();
-
+        //int x = pspDebugScreenGetX();
+        //int y = pspDebugScreenGetY();
         current_char = input[i];
         switch (current_char)
         {
@@ -217,8 +227,8 @@ int main()
             --*ptr;
             break;
         case '.':
-            pspDebugScreenPrintf((const char*)*ptr);
-            //pspDebugScreenPutChar(x, y, 0xFFFFFF, *ptr);
+            std::cout << ptr;
+            output += *ptr;
             break;
         case ',':
         {
@@ -273,7 +283,7 @@ int main()
             break;
         }
     }
-
+    pspprint(output.c_str());
     sceKernelDelayThread(5000000);
     sceKernelExitGame();
     return 0;

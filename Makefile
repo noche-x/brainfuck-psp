@@ -3,12 +3,12 @@ OBJS = src/main.o \
 src/common.o \
 
 INCDIR = $(PSPPATH)/include
-CFLAGS = -O3 -Wall -mpreferred-stack-boundary=4
-CXXFLAGS = $(CFLAGS) -fno-exceptions -fno-rtti -std=gnu++17
+CFLAGS = -O3 -G3 -ffast-math -fno-rtti -fno-exceptions -mpreferred-stack-boundary=4
+CXXFLAGS = -std=gnu++17
 ASFLAGS = $(CFLAGS)
 
 BUILD_PRX = 1
-PSP_FW_VERSION=371
+PSP_FW_VERSION=500
 PSP_LARGE_MEMORY = 1 #PHAT SUPPORT! Our app isn't that big! 
 
 LDFLAGS =
