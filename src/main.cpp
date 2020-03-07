@@ -95,7 +95,7 @@ int main()
     sceKernelDcacheWritebackInvalidateAll();
     // TODO show open from file or code directly menu
     // TODO show file manager
-    std::cout << "ayy fuck you" << std::endl;
+    std::cout << "[+] hi psp link!" << std::endl;
 
     int o_x = pspDebugScreenGetX(), o_y = pspDebugScreenGetX();
     pspDebugScreenSetXY(0, 33);
